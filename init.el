@@ -4,6 +4,11 @@
       column-number-mode t
       global-revert-non-file-buffers t)
 
+(setq-default indent-tabs-mode nil)
+
+;; only use spaces instead of tabs
+(global-tab-line-mode -1)
+
 ;; reloads file when it changes on disk
 (global-auto-revert-mode 1)
 
@@ -57,6 +62,9 @@
 ;; electric mode
 (electric-pair-mode 1)
 
+;; move across windows
+(windmove-default-keybindings)
+
 ;; melpa
 (require 'package)
 (add-to-list 'package-archives
@@ -89,15 +97,30 @@
   :bind (("C-x g" . magit-status)
 	 ("C-x C-g" . magit-status)))
 
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode))
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package beacon
+  :ensure t
+  :init (beacon-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(use-package marginalia vertico magit moe-theme)))
+ '(package-selected-packages '(beacon use-package marginalia vertico magit moe-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
